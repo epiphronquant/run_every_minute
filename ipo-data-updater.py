@@ -22,7 +22,7 @@ import numpy as np
 # In[ ]:
 
 
-df_main = pd.read_excel(r'../input/rawdata/RawData.xlsx')
+df_main = pd.read_excel(r'RawData.xlsx')
 
 ### Gather data from IPO
 page="http://www.aastocks.com/en/stocks/market/ipo/listedipo.aspx?s=3&o=0&page=" + str (1)
