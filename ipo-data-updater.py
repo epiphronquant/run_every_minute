@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
-get_ipython().system('pip install investpy --no-dependencies')
-get_ipython().system('pip install yfinance --no-dependencies')
-get_ipython().system('pip install multitasking --no-dependencies')
-get_ipython().system('pip install openpyxl  --no-dependencies')
-
-
-# In[ ]:
-
-
 import pandas as pd
 import yfinance as yf
 import investpy
