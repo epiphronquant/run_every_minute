@@ -1,13 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
+###/usr/bin/env python
+###  coding: utf-8
 
 import pandas as pd
 import yfinance as yf
 import investpy
 import numpy as np
-
-
-# In[ ]:
 
 
 df_main = pd.read_excel(r'RawData.xlsx')
@@ -56,10 +53,6 @@ def cleanpercent (df_main, column):
 df_new = cleanpercent (df_new, '% Chg. on2Debut▼')
 df_new = cleanpercent (df_new, 'Gray Market (%)2')
 df_new = cleanpercent (df_new, 'One LotSuccess Rate▼')
-
-
-# In[ ]:
-
 
 ### Add Yahoo Industries/Sector Data
 df2 = df_new ['Code']
@@ -123,14 +116,31 @@ mktcap = df_new['Listing Price'].astype(float) / df_new['Upper Offer Price'].ast
 df_new.insert (6, 'Market Cap(B)', value = mktcap)
 
 ### cleaning data before merging
-df_new = df_new.iloc [::-1]
 df_new = df_new.drop(columns = ['Last1','Acc.% Chg.▼' ],axis = 1)
 
-### concat new data with old data
+### code for adding a count as ipo? column for new data
+df_countipo = df_new['Name']
+abdc = df_countipo.str [-3:]
+
+abdc = abdc.str.replace('-SW', '1', regex=False)
+
+abdc = abdc.str [-2:]
+abdc = abdc.str.replace('-S','1', regex = False)
+
+abdc1 = []
+
+for ends in abdc:
+    if ends != '1':
+        ends = '0'
+    abdc1.append(ends)
+abdc1 = list(map(int, abdc1))
+    
+abdc1 = pd.DataFrame(abdc1, columns =['Count as IPO?'])
+df_new = pd.concat([df_new,abdc1], axis=1, ignore_index = False)
+df_new = df_new.iloc [::-1] 
+
+## concat new data with old data
 df_main = pd.concat([df_main,df_new], axis=0)
-
-
-# In[ ]:
 
 
 ## gather yahoo trading data and calculating return
@@ -250,17 +260,13 @@ df_yfret = df_tradingret.merge(df_HSIret, on = ['Code'], how = 'left')
 df_yfret = df_yfret.merge(df_HSHret, on = ['Code'], how = 'left')
 
 ### removing old data then adding new data
-df_end = df_main.iloc [:,-3:]
+df_end = df_main.iloc [:,-3:] ##!! Key piece of code!!!
 df_end = df_end.reset_index(drop=True)
 
 df_main = df_main.drop(df_main.columns[26:], axis = 1)
 
 df_main = df_main.merge(df_yfret, on = ['Code'], how = 'left')
 df_main = pd.concat ([df_main, df_end], axis=1)
-
-
-# In[ ]:
-
 
 ### cleaning df_main
 
@@ -287,5 +293,5 @@ discrepancy = abs(df_main ['% Chg. on2Debut▼'] - df_main['0 Trading Days'])
 discrepancy = discrepancy.round(2)
 df_main ['Discrepancy'] = discrepancy
 
-df_main.to_excel('RawData 2.xlsx', index = False)
+df_main.to_excel('RawData.xlsx', index = False)
 
