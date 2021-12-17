@@ -1,9 +1,9 @@
 name: scraper-ipo-updater
 
-#on:
-  #schedule:
-    #- cron: '* * * * *' # runs at 12:00 UTC everyday
-on: [workflow_dispatch]
+on:
+  schedule:
+    - cron: '0 15 * * *' # runs at 12:00 UTC everyday
+#on: [workflow_dispatch]
 
 jobs:
   build:
