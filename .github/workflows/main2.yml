@@ -1,4 +1,4 @@
-name: scraper-ipo-updater
+name: scraper-ipo-updater2
 
 on:
   schedule:
