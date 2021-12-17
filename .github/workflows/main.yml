@@ -2,7 +2,7 @@ name: scraper-ipo-updater
 
 on:
   schedule:
-    - cron: '4 7 * * *' # runs at 12:00 UTC everyday
+    - cron: '10 7 * * *' # runs at 12:00 UTC everyday
 #on: [workflow_dispatch]
 
 jobs:
