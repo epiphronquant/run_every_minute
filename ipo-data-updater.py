@@ -122,16 +122,16 @@ df_new = df_new.drop(columns = ['Last1','Acc.% Chg.▼' ],axis = 1)
 df_countipo = df_new['Name']
 abdc = df_countipo.str [-3:]
 
-abdc = abdc.str.replace('-SW', '1', regex=False)
+abdc = abdc.str.replace('-SW', '0', regex=False)
 
 abdc = abdc.str [-2:]
-abdc = abdc.str.replace('-S','1', regex = False)
+abdc = abdc.str.replace('-S','0', regex = False)
 
 abdc1 = []
 
 for ends in abdc:
-    if ends != '1':
-        ends = '0'
+    if ends != '0':
+        ends = '1'
     abdc1.append(ends)
 abdc1 = list(map(int, abdc1))
     
