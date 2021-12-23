@@ -7,15 +7,15 @@ Created on Mon Nov 22 12:30:34 2021
 
 import pandas as pd
 import datetime
-import yfinance as yf
-import pandas as pd
+# import yfinance as yf
+# import pandas as pd
 import requests
 import csv
-import multitasking
-from time import sleep
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+# import multitasking
+# from time import sleep
+# from bs4 import BeautifulSoup
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
 
 
 ############ Code for scraping SFC website for their short positions data
