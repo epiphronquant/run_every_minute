@@ -1,5 +1,1 @@
 pandas
-yfinance
-investpy
-numpy
-openpyxl
